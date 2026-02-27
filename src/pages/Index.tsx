@@ -1,14 +1,43 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import RoleSelector from "@/components/RoleSelector";
+import ScenarioDisplay from "@/components/ScenarioDisplay";
+import ResponseInput from "@/components/ResponseInput";
+import EvaluationResult from "@/components/EvaluationResult";
+
+type Screen = "home" | "scenario" | "result";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [screen, setScreen] = useState<Screen>("home");
+  const [, setRole] = useState<string | null>(null);
+
+  const handleStart = (selectedRole: string) => {
+    setRole(selectedRole);
+    setScreen("scenario");
+  };
+
+  const handleSubmit = (_response: string) => {
+    setScreen("result");
+  };
+
+  const handleRestart = () => {
+    setRole(null);
+    setScreen("home");
+  };
+
+  if (screen === "home") {
+    return <RoleSelector onStart={handleStart} />;
+  }
+
+  if (screen === "scenario") {
+    return (
+      <>
+        <ScenarioDisplay onContinue={() => setScreen("home")} />
+        <ResponseInput onSubmit={handleSubmit} />
+      </>
+    );
+  }
+
+  return <EvaluationResult onRestart={handleRestart} />;
 };
 
 export default Index;
