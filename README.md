@@ -1,8 +1,8 @@
-# Welcome to your Lovable project
+# Welcome to our project
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: https://skill-simulacrum-37.vercel.app/
 
 ## How can I edit this code?
 
